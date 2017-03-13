@@ -5,6 +5,8 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kc.walle.common.util.CollectionUtils;
+
 import nl.jssl.autounit.inputs.MethodcallArgumentsFactory;
 import nl.jssl.autounit.util.LinkedList;
 
@@ -20,9 +22,11 @@ public class ClassAnalyser<T> {
 
 	public ClassResults analyseAndGetResults() {
 		List<MethodExecutionResults> classresults = new ArrayList<>();
-
-		for (Method m : getPublicMethods()) {
-			classresults.add(analyseMethod(m));
+		List<Method> methods = getPublicMethods();
+		if(CollectionUtils.isNotEmpty(methods)){
+			for (Method m : getPublicMethods()) {
+				classresults.add(analyseMethod(m));
+			}
 		}
 
 		return new ClassResults(testTarget, classresults);

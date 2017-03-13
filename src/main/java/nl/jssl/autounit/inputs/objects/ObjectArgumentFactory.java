@@ -28,14 +28,14 @@ public class ObjectArgumentFactory {
 		return mock;
 	}
 
-	static class DefaultAnswer implements Answer<Object> {
+	public static class DefaultAnswer implements Answer<Object> {
 
 		@Override
 		public Object answer(InvocationOnMock invocation) throws Throwable {
 			Method method = invocation.getMethod();
 			// necessary?
 			if (returnsVoid(method)) {
-				return Void.TYPE;
+				return Void.TYPE.toString();
 			}
 			return null;
 
